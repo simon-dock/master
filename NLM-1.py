@@ -7,6 +7,8 @@ import matplotlib.animation as animation
 from matplotlib.animation import PillowWriter
 #from matplotlib._version import get_versions as mplv
 import makeData
+import numpy as np
+import copy
 
 
 
@@ -17,7 +19,6 @@ def initialize(dimensional, n):
     for i in range(n):
         for j in range(dimensional):
             vector[i][j] = round(random.uniform(-5.0, 5.0), 3)
-            #pass
             
     return vector
 
@@ -51,7 +52,12 @@ def distance(p):# p = [x....N],[x....N]の２個の点、N次元のデータの�
     dimensional = len(p[0])
     ans = [0]*dimensional
     sum = 0.0
-    
+
+    p[0] = np.array(p[0])
+    p[1] = np.array(p[1])
+
+    return np.linalg.norm(p[0]-p[1])
+"""
     for i in range(dimensional):
         for j in range(2):
             if j == 0:
@@ -61,6 +67,8 @@ def distance(p):# p = [x....N],[x....N]の２個の点、N次元のデータの�
         sum += ans[i]**2
         
     return math.sqrt(sum)
+"""
+
 
 
 def autodifferen(func, x, y):#自動偏微分
@@ -73,9 +81,11 @@ def autodifferen(func, x, y):#自動偏微分
     ans = [0] * (n*dimensional)
     count = 0
     
-    for i in range(n):
-        for j in range(dimensional):
-            tmp[i][j] = y[i][j]
+    """for i in range(n):
+       for j in range(dimensional):
+          tmp[i][j] = y[i][j]
+"""
+    tmp = copy.deepcopy(y)
     
     for i in range(n):
         for j in range(dimensional):
@@ -96,7 +106,7 @@ def differential(func, x, y, tmp, h):#微分
 
 def extreme(x, y):#最急降下法
     
-    a = 0.5
+    a = 10
     esp = 1.e-8#helix 4 #circle 8 stl 5
     ess = 1.e-15#helix 7 #circle 10
     err = 0.0
@@ -152,16 +162,16 @@ def extreme(x, y):#最急降下法
     return x, y, ims
 
 
-n = 4
+n = 30
 dimensional = 3
 i_d = 2
 #x0 = straightline(dimensional, n)
 #x0 = circule() #n=9
-#x0 = heiix(n) #n=15
+x0 = makeData.heiix(n) #n=15
 #x0 = try4() #n=4
 #x0 = cube()#n=27
 #x0 = cube_5()
-x0 = makeData.cube_9()
+#x0 = makeData.cube_9()
 
 n = len(x0)
 dimensional = len(x0[0])
