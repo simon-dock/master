@@ -105,6 +105,9 @@ def differential(func, x, y, tmp, h):#微分
 
 
 def extreme(x, y):#最急降下法
+
+    print(x)
+    print(y)
     
     a = 10
     esp = 1.e-8#helix 4 #circle 8 stl 5
@@ -167,11 +170,11 @@ dimensional = 3
 i_d = 2
 #x0 = straightline(dimensional, n)
 #x0 = circule() #n=9
-x0 = makeData.heiix(n) #n=15
+#x0 = makeData.heiix(n) #n=15
 #x0 = try4() #n=4
 #x0 = cube()#n=27
 #x0 = cube_5()
-#x0 = makeData.cube_9()
+x0 = makeData.cube_9()
 
 n = len(x0)
 dimensional = len(x0[0])
