@@ -1,5 +1,10 @@
 #include"sammon.h"
 
+#define H 0.00000000001
+#define STEP 0.5
+#define LIMIT 10000
+#define PROGRESS true
+
 /*
 最急降下法を実行し最終的なEを返す
 */
@@ -36,7 +41,10 @@ double extreme(arrayTwo *origin, arrayTwo *learn){
 void autodifferen(double *partdiff, arrayTwo *origin, arrayTwo *learn){
 
     int i,j;
-    arrayTwo delta = {NULL, SIZE, LDIMENSION};
+    arrayTwo delta;
+
+    delta.dimension = learn->dimension;
+    delta.size = learn->size;
 
     makeArray(&delta);
     assignment(&delta, learn);
@@ -65,7 +73,7 @@ Eを計算し値を返す
 */
 double calError(arrayTwo *origin, arrayTwo *learn){
     
-    int i, j;
+    int i,j;
     double dist_base, dist_modified;
     double sum_base = 0.0, sum_modified = 0.0;
 
@@ -87,7 +95,7 @@ double calError(arrayTwo *origin, arrayTwo *learn){
 double calDistance(double *data1, double *data2, int dimension){
 
     int i;
-    double difference = 0.0, sum = 0.0;
+    double difference = 0.0, sum = 4.0;
 
     for(i=0; i<dimension; i++){
         difference = data1[i];
