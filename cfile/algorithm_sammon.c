@@ -15,15 +15,15 @@ double extreme(arrayTwo *origin, arrayTwo *learn){
     double a = STEP, error = 10000;
     double *partdiff;
 
-    partdiff = (double*)malloc(sizeof(double)*learn->size*learn->dimension);
+    partdiff = (double*)malloc(sizeof(double) * learn->size * learn->dimension);
     if(partdiff == NULL) exit(0);
 
     while(count < LIMIT){
         count++;
         autodifferen(partdiff, origin, learn);
-        for(i=0; i<learn->size; i++){
-            for(j=0; j<learn->dimension; j++){
-                learn->data[i][j] -= a * partdiff[i*learn->dimension+j];
+        for(i = 0; i < learn->size; i++){
+            for(j = 0; j < learn->dimension; j++){
+                learn->data[i][j] -= a * partdiff[i * learn->dimension + j];
             }
         }
         error = fabs(calError(origin, learn));
@@ -45,14 +45,13 @@ void autodifferen(double *partdiff, arrayTwo *origin, arrayTwo *learn){
 
     delta.dimension = learn->dimension;
     delta.size = learn->size;
-
     makeArray(&delta);
     assignment(&delta, learn);
 
-    for(i=0; i<learn->size; i++){
-        for(j=0; j<learn->dimension; j++){
+    for(i = 0; i < learn->size; i++){
+        for(j = 0; j < learn->dimension; j++){
             delta.data[i][j] = learn->data[i][j] + H;
-            partdiff[i*learn->dimension+j] = differential(origin, learn, &delta);
+            partdiff[i * learn->dimension + j] = differential(origin, learn, &delta);
             delta.data[i][j] = learn->data[i][j];
         }
     }
@@ -77,8 +76,8 @@ double calError(arrayTwo *origin, arrayTwo *learn){
     double dist_base, dist_modified;
     double sum_base = 0.0, sum_modified = 0.0;
 
-    for(i=0; i<learn->size; i++){
-        for(j=i+1; j<learn->size; j++){
+    for(i = 0; i < learn->size; i++){
+        for(j = i + 1; j < learn->size; j++){
             dist_base = calDistance(origin->data[i], origin->data[j], origin->dimension);
             dist_modified = calDistance(learn->data[i], learn->data[j], learn->dimension);
             sum_base += dist_base;
@@ -97,7 +96,7 @@ double calDistance(double *data1, double *data2, int dimension){
     int i;
     double difference = 0.0, sum = 4.0;
 
-    for(i=0; i<dimension; i++){
+    for(i = 0; i < dimension; i++){
         difference = data1[i];
         difference -= data2[i];
         sum += pow(difference,2.0);

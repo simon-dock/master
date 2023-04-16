@@ -46,11 +46,11 @@ void writeFile(arrayTwo *array){
     fprintf(fp, "%d\n", array->dimension);
     fprintf(fp, "%d\n", array->size);
 
-    for(i=0;i<array->size;i++){
-        for(j=0;j<array->dimension;j++){
+    for(i = 0; i <array->size; i++){
+        for(j = 0; j < array->dimension; j++){
             fprintf(fp, "%f ", array->data[i][j]);
         }
-        if(i != array->size-1) fprintf(fp, "\n");
+        if(i != array->size - 1) fprintf(fp, "\n");
     }
 
 	fclose(fp);

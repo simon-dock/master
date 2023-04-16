@@ -8,11 +8,11 @@ void makeArray(arrayTwo *array){
 
     int i,j; 
 
-    array->data = (double**)malloc(sizeof(double*)*array->size);
-    array->data[0] = (double*)malloc(sizeof(double)*array->dimension*array->size);
+    array->data = (double**)malloc(sizeof(double*) * array->size);
+    array->data[0] = (double*)malloc(sizeof(double) * array->dimension * array->size);
     if(array->data == NULL) exit(0);
-    for(i=1; i<array->size; i++){
-        array->data[i] = array->data[i-1] + array->dimension;
+    for(i = 1; i < array->size; i++){
+        array->data[i] = array->data[i - 1] + array->dimension;
     }
 }
 
@@ -23,9 +23,9 @@ void input(arrayTwo *array){
 
     int i,j;
 
-    for(i=0;i<array->size;i++){
-        for(j=0;j<array->dimension;j++){
-            array->data[i][j]=i*2;
+    for(i = 0; i < array->size; i++){
+        for(j = 0; j < array->dimension; j++){
+            array->data[i][j] = i * 2;
         }
     }
 }
@@ -37,9 +37,9 @@ void inputRandam(arrayTwo *array){
 
     int i,j;
     
-    for(i=0;i<array->size;i++){
-        for(j=0;j<array->dimension;j++){
-            array->data[i][j]=rand()%10;
+    for(i = 0; i < array->size; i++){
+        for(j = 0; j < array->dimension; j++){
+            array->data[i][j] = rand() % 10;
         }
     }
 }
@@ -52,8 +52,8 @@ void assignment(arrayTwo *array1, arrayTwo *array2){
 
     int i,j;
 
-    for(i=0;i<array1->size;i++){
-        for(j=0;j<array1->dimension;j++){
+    for(i = 0; i < array1->size; i++){
+        for(j = 0; j < array1->dimension; j++){
             array1->data[i][j] = array2->data[i][j];
         }
     }
@@ -69,8 +69,8 @@ void printArray(arrayTwo *array){
     printf("%d dimension\n",array->dimension);
     printf("%d size\n",array->size);
     
-    for(i=0;i<array->size;i++){
-        for(j=0;j<array->dimension;j++){
+    for(i = 0; i <array->size; i++){
+        for(j = 0; j < array->dimension; j++){
             printf("%f,",array->data[i][j]);
         }
         printf("\n");
