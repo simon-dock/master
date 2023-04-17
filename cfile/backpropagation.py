@@ -12,7 +12,7 @@ def squared_error(z, t):
     return (z-t)**2/2
 
 #np.random.seed(20220512)
-
+ 
 epoch = 10000
 lr = 0.7
 I, H, O = 3, 2, 1
@@ -68,6 +68,7 @@ for k in range(1):
         h_x.append(count)
 
         if count % 10 == 11:
+            print("a")
             cc += 1
             for i in range(len(inputs)):
                 input = inputs[i]

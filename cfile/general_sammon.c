@@ -36,10 +36,12 @@ void input(arrayTwo *array){
 void inputRandam(arrayTwo *array){
 
     int i,j;
+    int symbol = 1;
     
     for(i = 0; i < array->size; i++){
         for(j = 0; j < array->dimension; j++){
-            array->data[i][j] = rand() % 10;
+            if(rand() % 2 == 0) symbol = symbol * -1;
+            array->data[i][j] = (rand() % 10) * symbol;
         }
     }
 }
@@ -74,6 +76,19 @@ void printArray(arrayTwo *array){
             printf("%f,",array->data[i][j]);
         }
         printf("\n");
+    }
+    printf("\n");
+}
+
+void printProgress(arrayTwo *array){
+
+    int i,j;
+    
+    for(i = 0; i <array->size; i++){
+        for(j = 0; j < array->dimension; j++){
+            printf("%.2f,",array->data[i][j]);
+        }
+        printf("  :  ");
     }
     printf("\n");
 }

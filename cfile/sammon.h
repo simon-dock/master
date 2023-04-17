@@ -27,6 +27,7 @@ void input(arrayTwo *array);
 void inputRandam(arrayTwo *array);
 void assignment(arrayTwo *array1, arrayTwo *array2);
 void printArray(arrayTwo *array);
+void printProgress(arrayTwo *array);
 
 //algorithm
 double extreme(arrayTwo *origin, arrayTwo *learn);

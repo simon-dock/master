@@ -1,7 +1,7 @@
 #include"sammon.h"
 
-#define SIZE 7
-#define NDIMENSION 3
+#define SIZE 30
+#define NDIMENSION 8
 #define LDIMENSION 2
 
 int main(void){
@@ -11,11 +11,11 @@ int main(void){
     arrayTwo origin = {NULL, SIZE, NDIMENSION};
     arrayTwo learn = {NULL, SIZE, LDIMENSION};
 
-    //readFile(&origin, &learn);
+    readFile(&origin, &learn);
+    //makeArray(&origin);
+    //input(&origin);
 
-    makeArray(&origin);
     makeArray(&learn);
-    input(&origin);
     inputRandam(&learn);
   
     printArray(&origin);
