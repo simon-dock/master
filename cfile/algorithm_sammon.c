@@ -2,8 +2,8 @@
 
 #define H 0.00000000001
 #define STEP 0.5
-#define LIMIT 100000
-#define PROGRESS false
+#define LIMIT 10000
+#define PROGRESS true
 
 /*
 最急降下法を実行し最終的なEを返す
@@ -27,10 +27,7 @@ double extreme(arrayTwo *origin, arrayTwo *learn){
             }
         }
         error = fabs(calError(origin, learn));
-        if(PROGRESS == true && count % 100 == 0) {
-            //printf("%d:%f\n", count, error);
-            printProgress(learn);
-        }
+        if(PROGRESS == true && count % 2 == 0) printf("%d:%f\n", count, error);
     }
 
     free(partdiff);
