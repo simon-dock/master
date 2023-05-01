@@ -17,7 +17,7 @@ def squared_error(z, t):
  
 lr = 0.7
 I, H, O = 3, 2, 1
-dataNumber = 100
+dataNumber = 1000
 
 inputs = np.array(([1,0,0],[1,0,1],[1,1,0],[1,1,1]))
 teachers = np.array([0,1,1,0])
@@ -34,38 +34,59 @@ datalist.append(str(len(W)+len(S)*len(S[0]))+"\n")
 datalist.append(str(dataNumber)+"\n")
 
 for k in range(dataNumber):
-    count = 0
-    
-    hiddens = np.zeros(H)
-    output = np.zeros(O)
-
-    S = np.random.normal(0.0, 0.1, (I,H))
-    W = np.random.normal(0.0, 0.1, (H+1,O))
-
     while(1):
-
-        i = np.random.randint(0,4)
-        count += 1
-        error = 0
-        input = inputs[i]
-        teacher = teachers[i]
-        hiddens = np.dot(input, S)
-        hiddens = sigmoid(hiddens)
-        hiddens_tmp = np.concatenate([[1],hiddens])
-        output = np.dot(hiddens_tmp,W)
-        output = sigmoid(output)
-        error = squared_error(output,teacher)
-        r = (teacher - output)*output*(1-output)
-        delta_w =  lr * r * hiddens_tmp
-        r_dash =  r * W[1:].T* hiddens * (1-hiddens)
-        delta_s =  lr * r_dash.T * input
-        delta_w = delta_w.reshape(H+1,O)
-        delta_s = delta_s.T
-        W += delta_w
-        S += delta_s 
+        count = 0
         
-        if count > 10000:
+        hiddens = np.zeros(H)
+        output = np.zeros(O)
+
+        S = np.random.normal(0.0, 0.1, (I,H))
+        W = np.random.normal(0.0, 0.1, (H+1,O))
+
+   
+        while(1):
+
+            i = np.random.randint(0,4)
+            count += 1
+            error = 0
+            input = inputs[i]
+            teacher = teachers[i]
+            hiddens = np.dot(input, S)
+            hiddens = sigmoid(hiddens)
+            hiddens_tmp = np.concatenate([[1],hiddens])
+            output = np.dot(hiddens_tmp,W)
+            output = sigmoid(output)
+            error = squared_error(output,teacher)
+            r = (teacher - output)*output*(1-output)
+            delta_w =  lr * r * hiddens_tmp
+            r_dash =  r * W[1:].T* hiddens * (1-hiddens)
+            delta_s =  lr * r_dash.T * input
+            delta_w = delta_w.reshape(H+1,O)
+            delta_s = delta_s.T
+            W += delta_w
+            S += delta_s 
+            
+            if count > 10000:
+                break
+        
+        Flag = True
+            
+        for i in range(4):
+            input = inputs[i]
+            teacher = teachers[i]
+            hiddens = np.dot(input, S)
+            hiddens = sigmoid(hiddens)
+            hiddens_tmp = np.concatenate([[1],hiddens])
+            output = np.dot(hiddens_tmp,W)
+            output = sigmoid(output)
+            judge = abs(teacher - output)
+            print(judge)
+            if judge > 0.1:
+                Flag = False
+                
+        if Flag == True:
             break
+        
     
     for i in range(len(W)):
         datalist.append(str(W[i][0])+"\n")
@@ -77,8 +98,8 @@ for k in range(dataNumber):
                 datalist.append(str(S[i][j])+"\n")
                 
     print("finish " + str(k+1))
-        
+    
 
-f = open('origin.txt', 'w')
+f = open('1000.txt', 'w')
 f.writelines(datalist)
 f.close()
