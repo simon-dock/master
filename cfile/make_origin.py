@@ -17,7 +17,7 @@ def squared_error(z, t):
  
 lr = 0.7
 I, H, O = 3, 2, 1
-dataNumber = 1000
+dataNumber = 250
 
 inputs = np.array(([1,0,0],[1,0,1],[1,1,0],[1,1,1]))
 teachers = np.array([0,1,1,0])
@@ -100,6 +100,6 @@ for k in range(dataNumber):
     print("finish " + str(k+1))
     
 
-f = open('1000.txt', 'w')
+f = open('250.txt', 'w')
 f.writelines(datalist)
 f.close()
