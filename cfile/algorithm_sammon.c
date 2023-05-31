@@ -27,7 +27,7 @@ double extreme(arrayTwo *origin, arrayTwo *learn){
             }
         }
         error = fabs(calError(origin, learn));
-        if(PROGRESS == true && count % 2 == 0) printf("%d:%f\n", count, error);
+        if(PROGRESS == true && count % 1 == 0) printf("%d:%f\n", count, error);
     }
 
     free(partdiff);
@@ -40,14 +40,21 @@ double extreme(arrayTwo *origin, arrayTwo *learn){
 */
 void autodifferen(double *partdiff, arrayTwo *origin, arrayTwo *learn){
 
+
     int i,j;
     arrayTwo delta;
+    differentialData data;
+    pthread_t thread;
 
     delta.dimension = learn->dimension;
     delta.size = learn->size;
     makeArray(&delta);
     assignment(&delta, learn);
 
+    
+ 
+    pthread_create(&thread,NULL,(double *)differential,&data);
+    pthread_join(thread, NULL);
     for(i = 0; i < learn->size; i++){
         for(j = 0; j < learn->dimension; j++){
             delta.data[i][j] = learn->data[i][j] + H;
@@ -55,6 +62,8 @@ void autodifferen(double *partdiff, arrayTwo *origin, arrayTwo *learn){
             delta.data[i][j] = learn->data[i][j];
         }
     }
+
+
     
     free(delta.data);
 }
@@ -86,12 +95,14 @@ double calError(arrayTwo *origin, arrayTwo *learn){
     }
 
     return  sum_modified / sum_base;
+    
 }
 
 /*
 ２点間の距離を計算し値を返す　多次元対応
 */
 double calDistance(double *data1, double *data2, int dimension){
+
 
     int i;
     double difference = 0.0, sum = 4.0;

@@ -5,6 +5,7 @@
 #include<stdlib.h>
 #include<math.h>
 #include<stdbool.h>
+#include <pthread.h>
 
 //main,algorithmに分割宣言している　defineの中身を変更し、remakeしても実行ファイルに更新されなかったから
 #define READFILENAME "origin.txt"
@@ -16,6 +17,12 @@ typedef struct arrayTwo{
     int size;
     int dimension;
 }arrayTwo;
+
+typedef struct differentialData{
+    arrayTwo *origin;
+    arrayTwo *learn;
+    arrayTwo *delta;
+}differentialData;
 
 //file
 void readFile(arrayTwo *array, arrayTwo *learn);
